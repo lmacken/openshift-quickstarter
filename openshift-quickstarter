@@ -53,7 +53,7 @@ elif [ $QUICKSTART = 'wordpress' -o $QUICKSTART = 'cakephp' -o $QUICKSTART = 'fr
 elif [ $QUICKSTART = 'rails' -o $QUICKSTART = 'redmine' ]; then
     TYPE=rack-1.1
     DB=true
-elif [ $QUICKSTART = 'tweetstream' -o 'seambooking' ]; then
+elif [ $QUICKSTART = 'tweetstream' -o $QUICKSTART = 'seambooking' ]; then
     TYPE=jbossas-7.0
 fi
 
