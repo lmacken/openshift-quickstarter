@@ -1,0 +1,105 @@
+#!/bin/bash
+# OpenShift Quickstarter
+# Deploy a variety of applications to the cloud with a single command.
+#
+# Author: Luke Macken <lmacken@redhat.com>
+#
+# TODO:
+#  redmine
+#  sqlbuddy
+#  tweetstream
+
+if [ ! $# = 4 ]; then
+    echo "Usage: $0 LOGIN DOMAIN APPNAME QUICKSTART"
+    echo
+    echo "      LOGIN: Your OpenShift username"
+    echo "     DOMAIN: Your OpenShift domain"
+    echo "    APPNAME: The name of your application"
+    echo " QUICKSTART: The type of application to create"
+    echo
+    echo "Supported quickstarts:"
+    echo
+    echo "[ Frameworks ]"
+    echo "  * pyramid - A fast, minimal, well-tested Python web framework"
+    echo "  * turbogears2 - Front-to-back Python web development megaframework"
+    echo "  * django - A high-level Python Web framework"
+    echo "  * rails - A comprehensive Ruby web-application framework"
+    echo "  * seambooking - Seam is a platform for building rich webapps in Java"
+    echo
+    echo "[ Content Management ]"
+    echo "  * drupal - A content-management platform"
+    echo "  * wordpress - Blog tool and publishing platform"
+    echo "  * mediawiki - A wiki engine"
+    echo "  * cakephp - A rapid development PHP framework"
+    echo "  * frogcms - A content-management system written in PHP"
+    echo "  * wolfcms - A PHP-based, easily extended content-management system"
+    echo "  * reviewboard - A web-based code review tool"
+    echo
+    exit 1
+fi
+
+LOGIN=$1
+DOMAIN=$2
+APP=$3
+QUICKSTART=$4
+TYPE=wsgi-3.2
+DB=false
+
+if [ $QUICKSTART = 'reviewboard' ]; then
+    DB=true
+elif [ $QUICKSTART = 'wordpress' -o $QUICKSTART = 'cakephp' -o $QUICKSTART = 'frogcms' -o $QUICKSTART = 'wolfcms' -o $QUICKSTART = 'drupal' -o $QUICKSTART = 'sqlbuddy' -o $QUICKSTART = 'mediawiki' ]; then
+    TYPE=php-5.3
+    DB=true
+elif [ $QUICKSTART = 'rails' -o $QUICKSTART = 'redmine' ]; then
+    TYPE=rack-1.1
+    DB=true
+elif [ $QUICKSTART = 'tweetstream' -o 'seambooking' ]; then
+    TYPE=jbossas-7.0
+fi
+
+if [ $QUICKSTART = 'django' ]; then
+    # Forked until pull requests get merged
+    URL=git://github.com/lmacken/$QUICKSTART-example.git
+elif [ $QUICKSTART = 'turbogears2' -o $QUICKSTART = 'pyramid' ]; then
+    # Until openshift forks exist
+    URL=git://github.com/lmacken/$QUICKSTART-openshift-quickstart.git
+elif [ $QUICKSTART = 'redmine' -o $QUICKSTART = 'sqlbuddy' ]; then
+    URL=git://github.com/openshift/$QUICKSTART-openshift-quickstart.git
+else
+    URL=git://github.com/openshift/$QUICKSTART-example.git
+fi
+
+rhc-create-app -a $APP -t $TYPE -l $LOGIN || exit
+cd $APP
+
+if [ $DB = true ]; then
+    rhc-ctl-app -a $APP -e add-mysql-5.1 -l $LOGIN || exit
+fi
+
+# Git has trouble when merges replace a directory with a symlink.
+# These quickstarts set wsgi/static to a symlink.
+if [ $QUICKSTART = 'turbogears2' -o $QUICKSTART = 'pyramid' ]; then
+    git rm -r wsgi/static
+    git commit -m "remove the static directory"
+fi
+
+# Pull in the appropriate quickstart template
+git remote add upstream -m master $URL
+git pull -s recursive -X theirs upstream master
+
+if [ $QUICKSTART = 'frogcms' ]; then
+    sed -i -e "s/frogcms-dbvs/$APP-$DOMAIN/" php/config.php
+    git commit -am "Update the base URL"
+elif [ $QUICKSTART = 'wolfcms' ]; then
+    sed -i -e "s/wolfcms-dbvs/$APP-$DOMAIN/" php/config.php
+    git commit -am "Update the base URL"
+fi
+
+git push
+
+cat README*
+
+echo "Complete!"
+echo "You can view your application at http://$APP-$DOMAIN.rhcloud.com"
+
+firefox http://$APP-$DOMAIN.rhcloud.com
