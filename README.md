@@ -18,13 +18,13 @@ Supported quickstarts:
   * turbogears2 - Front-to-back Python web development megaframework
   * django - A high-level Python Web framework
   * rails - A comprehensive Ruby web-application framework
+  * cakephp - A rapid development PHP framework
   * seambooking - Seam is a platform for building rich webapps in Java
 
 [ Content Management ]
   * drupal - A content-management platform
   * wordpress - Blog tool and publishing platform
   * mediawiki - A wiki engine
-  * cakephp - A rapid development PHP framework
   * frogcms - A content-management system written in PHP
   * wolfcms - A PHP-based, easily extended content-management system
   * reviewboard - A web-based code review tool
