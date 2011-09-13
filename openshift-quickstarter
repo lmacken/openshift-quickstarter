@@ -79,7 +79,7 @@ fi
 
 # Git has trouble when merges replace a directory with a symlink.
 # These quickstarts set wsgi/static to a symlink.
-if [ $QUICKSTART = 'turbogears2' -o $QUICKSTART = 'pyramid' ]; then
+if [ $QUICKSTART = 'pyramid' ]; then
     git rm -r wsgi/static
     git commit -m "remove the static directory"
 fi
