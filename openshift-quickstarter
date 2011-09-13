@@ -100,9 +100,5 @@ fi
 
 git push
 
-cat README*
-
 echo "Complete!"
 echo "You can view your application at http://$APP-$DOMAIN.rhcloud.com"
-
-xdg-open http://$APP-$DOMAIN.rhcloud.com
