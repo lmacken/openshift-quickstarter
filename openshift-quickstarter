@@ -8,6 +8,8 @@
 #  redmine
 #  sqlbuddy
 #  tweetstream
+#  flask
+#  moksha
 
 set -e
 
