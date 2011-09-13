@@ -45,7 +45,7 @@ QUICKSTART=$4
 TYPE=wsgi-3.2
 DB=false
 
-if [ $QUICKSTART = 'reviewboard' ]; then
+if [ $QUICKSTART = 'turbogears2' -o $QUICKSTART = 'reviewboard' ]; then
     DB=true
 elif [ $QUICKSTART = 'wordpress' -o $QUICKSTART = 'cakephp' -o $QUICKSTART = 'frogcms' -o $QUICKSTART = 'wolfcms' -o $QUICKSTART = 'drupal' -o $QUICKSTART = 'sqlbuddy' -o $QUICKSTART = 'mediawiki' ]; then
     TYPE=php-5.3
