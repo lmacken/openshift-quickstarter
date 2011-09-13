@@ -73,6 +73,7 @@ rhc-create-app -a $APP -t $TYPE -l $LOGIN || exit
 cd $APP
 
 if [ $DB = true ]; then
+    echo "Adding MySQL 5.1 cartridge to $APP"
     rhc-ctl-app -a $APP -e add-mysql-5.1 -l $LOGIN || exit
 fi
 
