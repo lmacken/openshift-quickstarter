@@ -46,10 +46,11 @@ LOGIN=$1
 DOMAIN=$2
 APP=$3
 QUICKSTART=$4
-TYPE=wsgi-3.2
+TYPE=
 DB=false
 
-if [ $QUICKSTART = 'turbogears2' -o $QUICKSTART = 'reviewboard' ]; then
+if [ $QUICKSTART = 'pyramid' -o $QUICKSTART = 'turbogears2' -o $QUICKSTART = 'reviewboard' ]; then
+    TYPE=wsgi-3.2
     DB=true
 elif [ $QUICKSTART = 'wordpress' -o $QUICKSTART = 'cakephp' -o $QUICKSTART = 'frogcms' -o $QUICKSTART = 'wolfcms' -o $QUICKSTART = 'drupal' -o $QUICKSTART = 'sqlbuddy' -o $QUICKSTART = 'mediawiki' ]; then
     TYPE=php-5.3
@@ -79,13 +80,6 @@ cd $APP
 if [ $DB = true ]; then
     echo "Adding MySQL 5.1 cartridge to $APP"
     rhc-ctl-app -a $APP -e add-mysql-5.1 -l $LOGIN
-fi
-
-# Git has trouble when merges replace a directory with a symlink.
-# These quickstarts set wsgi/static to a symlink.
-if [ $QUICKSTART = 'pyramid' ]; then
-    git rm -r wsgi/static
-    git commit -m "remove the static directory"
 fi
 
 # Pull in the appropriate quickstart template
