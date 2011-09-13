@@ -9,6 +9,8 @@
 #  sqlbuddy
 #  tweetstream
 
+set -e
+
 if [ ! $# = 4 ]; then
     echo "Usage: $0 LOGIN DOMAIN APPNAME QUICKSTART"
     echo
@@ -69,12 +71,12 @@ else
     URL=git://github.com/openshift/$QUICKSTART-example.git
 fi
 
-rhc-create-app -a $APP -t $TYPE -l $LOGIN || exit
+rhc-create-app -a $APP -t $TYPE -l $LOGIN
 cd $APP
 
 if [ $DB = true ]; then
     echo "Adding MySQL 5.1 cartridge to $APP"
-    rhc-ctl-app -a $APP -e add-mysql-5.1 -l $LOGIN || exit
+    rhc-ctl-app -a $APP -e add-mysql-5.1 -l $LOGIN
 fi
 
 # Git has trouble when merges replace a directory with a symlink.
