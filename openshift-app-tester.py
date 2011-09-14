@@ -90,6 +90,28 @@ class TestPyBlosxom(OpenShiftQuickstartTest, unittest.TestCase):
     title = 'A PyBlosxom blog running in the Red Hat Cloud!'
     db = False
 
+class TestCakePHP(OpenShiftQuickstartTest, unittest.TestCase):
+    app = 'cakephp'
+    title = 'CakePHP: the rapid development php framework'
+
+class TestSeamBooking(OpenShiftQuickstartTest, unittest.TestCase):
+    app = 'seambooking'
+    title = 'Created with Seam'
+    db = False
+
+class TestFrogCMS(OpenShiftQuickstartTest, unittest.TestCase):
+    app = 'frogcms'
+    title = 'Powered by <a href="http://www.madebyfrog.com/" alt="Frog">'
+
+class TestWolfCMS(OpenShiftQuickstartTest, unittest.TestCase):
+    app = 'wolfcms'
+    title = '<a href="http://www.wolfcms.org/" title="Wolf CMS">Wolf CMS</a>'
+
+class TestReviewBoard(OpenShiftQuickstartTest, unittest.TestCase):
+    app = 'reviewboard'
+    title = 'Log In | Review Board'
+    index = '/account/login/?next_page=/dashboard/'
+
 
 if __name__ == '__main__':
     if not login:
