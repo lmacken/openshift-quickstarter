@@ -38,6 +38,7 @@ if [ ! $# = 4 ]; then
     echo "  * frogcms - A content-management system written in PHP"
     echo "  * wolfcms - A PHP-based, easily extended content-management system"
     echo "  * reviewboard - A web-based code review tool"
+    echo "  * pyblosxom - A lightweight file-based weblog system"
     echo
     exit 1
 fi
@@ -60,12 +61,14 @@ elif [ $QUICKSTART = 'rails' -o $QUICKSTART = 'redmine' ]; then
     DB=true
 elif [ $QUICKSTART = 'tweetstream' -o $QUICKSTART = 'seambooking' ]; then
     TYPE=jbossas-7.0
+elif [ $QUICKSTART = 'pyblosxom' ]; then
+    TYPE=wsgi-3.2
 fi
 
 if [ $QUICKSTART = 'django' ]; then
     # Forked until pull requests get merged
     URL=git://github.com/lmacken/$QUICKSTART-example.git
-elif [ $QUICKSTART = 'turbogears2' -o $QUICKSTART = 'pyramid' ]; then
+elif [ $QUICKSTART = 'turbogears2' -o $QUICKSTART = 'pyramid' -o $QUICKSTART = 'pyblosxom' ]; then
     # Until openshift forks exist
     URL=git://github.com/lmacken/$QUICKSTART-openshift-quickstart.git
 elif [ $QUICKSTART = 'redmine' -o $QUICKSTART = 'sqlbuddy' ]; then
