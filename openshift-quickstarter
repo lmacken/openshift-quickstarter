@@ -50,7 +50,7 @@ QUICKSTART=$4
 TYPE=
 DB=false
 
-if [ $QUICKSTART = 'pyramid' -o $QUICKSTART = 'turbogears2' -o $QUICKSTART = 'reviewboard' ]; then
+if [ $QUICKSTART = 'pyramid' -o $QUICKSTART = 'turbogears2' -o $QUICKSTART = 'reviewboard' -o $QUICKSTART = 'django' ]; then
     TYPE=wsgi-3.2
     DB=true
 elif [ $QUICKSTART = 'wordpress' -o $QUICKSTART = 'cakephp' -o $QUICKSTART = 'frogcms' -o $QUICKSTART = 'wolfcms' -o $QUICKSTART = 'drupal' -o $QUICKSTART = 'sqlbuddy' -o $QUICKSTART = 'mediawiki' ]; then
