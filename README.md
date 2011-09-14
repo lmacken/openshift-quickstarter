@@ -28,5 +28,6 @@ Supported quickstarts:
   * frogcms - A content-management system written in PHP
   * wolfcms - A PHP-based, easily extended content-management system
   * reviewboard - A web-based code review tool
+  * pyblosxom - A lightweight file-based weblog system
 
 ```
