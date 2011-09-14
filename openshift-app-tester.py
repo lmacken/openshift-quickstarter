@@ -20,7 +20,8 @@ class OpenShiftQuickstartTest(object):
     index = '/'
 
     def setUp(self):
-        self.html = self._create_app()
+        self._create_app()
+        self.html = self.get(self.index)
 
     def tearDown(self):
         self._destroy_app()
@@ -34,8 +35,6 @@ class OpenShiftQuickstartTest(object):
             child.expect('Password:')
             child.sendline(password)
         child.expect(pexpect.EOF)
-        return pexpect.run('curl http://%s-%s.rhcloud.com%s' % (
-            self.app, domain, self.index))
 
     def _destroy_app(self):
         if os.path.isdir(self.app):
@@ -47,6 +46,10 @@ class OpenShiftQuickstartTest(object):
         child.expect('Do you want to destroy this application \(y\/n\):')
         child.sendline('y')
         child.expect(pexpect.EOF)
+
+    def get(self, path):
+        return pexpect.run('curl http://%s-%s.rhcloud.com%s' % (
+            self.app, domain, path))
 
     def test_index(self):
         assert self.title in self.html, self.html
