@@ -1,103 +1,85 @@
-#!/bin/bash
+#!/usr/bin/env python
 # OpenShift Quickstarter
 # Deploy a variety of applications to the cloud with a single command.
 #
-# Author: Luke Macken <lmacken@redhat.com>
+# Copyright (C) 2011 Red Hat, Inc.
 #
-# TODO:
-#  redmine
-#  sqlbuddy
-#  tweetstream
-#  flask
-#  moksha
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+#
+# Author: Luke Macken <lmacken@redhat.com>
 
-set -e
+import sys, subprocess
 
-if [ ! $# = 4 ]; then
-    echo "Usage: $0 LOGIN DOMAIN APPNAME QUICKSTART"
-    echo
-    echo "      LOGIN: Your OpenShift username"
-    echo "     DOMAIN: Your OpenShift domain"
-    echo "    APPNAME: The name of your application"
-    echo " QUICKSTART: The type of application to create"
-    echo
-    echo "Supported quickstarts:"
-    echo
-    echo "[ Frameworks ]"
-    echo "  * pyramid - A fast, minimal, well-tested Python web framework"
-    echo "  * turbogears2 - Front-to-back Python web development megaframework"
-    echo "  * django - A high-level Python Web framework"
-    echo "  * rails - A comprehensive Ruby web-application framework"
-    echo "  * cakephp - A rapid development PHP framework"
-    echo "  * seambooking - Seam is a platform for building rich webapps in Java"
-    echo
-    echo "[ Content Management ]"
-    echo "  * drupal - A content-management platform"
-    echo "  * wordpress - Blog tool and publishing platform"
-    echo "  * mediawiki - A wiki engine"
-    echo "  * frogcms - A content-management system written in PHP"
-    echo "  * wolfcms - A PHP-based, easily extended content-management system"
-    echo "  * reviewboard - A web-based code review tool"
-    echo "  * pyblosxom - A lightweight file-based weblog system"
-    echo
-    exit 1
-fi
+python = 'wsgi-3.2'
+perl = 'perl-5.10'
+java = 'jbossas-7.0'
+ruby = 'rack-1.1'
+php = 'php-5.3'
 
-LOGIN=$1
-DOMAIN=$2
-APP=$3
-QUICKSTART=$4
-TYPE=
-DB=false
+db = 'mysql-5.1'
 
-if [ $QUICKSTART = 'pyramid' -o $QUICKSTART = 'turbogears2' -o $QUICKSTART = 'reviewboard' -o $QUICKSTART = 'django' ]; then
-    TYPE=wsgi-3.2
-    DB=true
-elif [ $QUICKSTART = 'wordpress' -o $QUICKSTART = 'cakephp' -o $QUICKSTART = 'frogcms' -o $QUICKSTART = 'wolfcms' -o $QUICKSTART = 'drupal' -o $QUICKSTART = 'sqlbuddy' -o $QUICKSTART = 'mediawiki' ]; then
-    TYPE=php-5.3
-    DB=true
-elif [ $QUICKSTART = 'rails' -o $QUICKSTART = 'redmine' ]; then
-    TYPE=rack-1.1
-    DB=true
-elif [ $QUICKSTART = 'tweetstream' -o $QUICKSTART = 'seambooking' ]; then
-    TYPE=jbossas-7.0
-elif [ $QUICKSTART = 'pyblosxom' ]; then
-    TYPE=wsgi-3.2
-fi
+openshift_repo = 'git://github.com/openshift/%s-example.git'
+openshift_alt_repo = 'git://github.com/openshift/%s-openshift-quickstart.git'
+lmacken_repo = 'git://github.com/lmacken/%s-openshift-quickstart.git'
+lmacken_fork_repo = 'git://github.com/lmacken/%s-example.git'
 
-if [ $QUICKSTART = 'django' ]; then
-    # Forked until pull requests get merged
-    URL=git://github.com/lmacken/$QUICKSTART-example.git
-elif [ $QUICKSTART = 'turbogears2' -o $QUICKSTART = 'pyramid' -o $QUICKSTART = 'pyblosxom' ]; then
-    # Until openshift forks exist
-    URL=git://github.com/lmacken/$QUICKSTART-openshift-quickstart.git
-elif [ $QUICKSTART = 'redmine' -o $QUICKSTART = 'sqlbuddy' ]; then
-    URL=git://github.com/openshift/$QUICKSTART-openshift-quickstart.git
-else
-    URL=git://github.com/openshift/$QUICKSTART-example.git
-fi
+quickstarts = {
+    'pyramid': {'type': python, 'db': True, 'repo': lmacken_repo },
+    'turbogears2': {'type': python, 'db': True, 'repo': lmacken_repo},
+    'django': {'type': python, 'db': True, 'repo': lmacken_fork_repo},
+    'pyblosxom': {'type': python, 'db': False, 'repo': lmacken_repo},
+    'rails': {'type': ruby, 'db': True, 'repo': openshift_repo},
+    'reviewboard': {'type': python, 'db': True, 'repo': openshift_repo},
+    'mediawiki': {'type': php, 'db': True, 'repo': openshift_repo},
+    'drupal': {'type': php, 'db': True, 'repo': openshift_repo},
+    'wordpress': {'type': php, 'db': True, 'repo': openshift_repo},
+    'cakephp': {'type': php, 'db': True, 'repo': openshift_repo},
+    'wolfcms': {'type': php, 'db': True, 'repo': openshift_repo},
+    'frogcms': {'type': php, 'db': True, 'repo': openshift_repo},
+    'seambooking': {'type': java, 'db': True, 'repo': openshift_repo},
+    'sqlbuddy': {'type': php, 'db': True, 'repo': openshift_alt_repo},
+}
 
-rhc-create-app -a $APP -t $TYPE -l $LOGIN
-cd $APP
+run = lambda cmd, **kw: subprocess.call(cmd, shell=True, **kw)
 
-if [ $DB = true ]; then
-    echo "Adding MySQL 5.1 cartridge to $APP"
-    rhc-ctl-app -a $APP -e add-mysql-5.1 -l $LOGIN
-fi
+if len(sys.argv) != 5:
+    print(file('README.md').read())
+    sys.exit(1)
+
+prog, login, domain, app_name, quickstart = sys.argv
+
+# Create the application & database
+app = quickstarts[quickstart]
+run('rhc-create-app -a %s -t %s -l %s' % (app_name, app['type'], login))
+if app['db']:
+    print("Adding %s cartridge to %s" % (db, app_name))
+    run('rhc-ctl-app -a %s -e add-%s -l %s' % (app_name, db, login))
 
 # Pull in the appropriate quickstart template
-git remote add upstream -m master $URL
-git pull -s recursive -X theirs upstream master
+run('git remote add upstream -m master %s' % app['repo'] % quickstart,
+    cwd=app_name)
+run('git pull -s recursive -X theirs upstream master', cwd=app_name)
 
-if [ $QUICKSTART = 'frogcms' ]; then
-    sed -i -e "s/frogcms-dbvs/$APP-$DOMAIN/" php/config.php
-    git commit -am "Update the base URL"
-elif [ $QUICKSTART = 'wolfcms' ]; then
-    sed -i -e "s/wolfcms-dbvs/$APP-$DOMAIN/" php/config.php
-    git commit -am "Update the base URL"
-fi
+# Pre-deployment configuration
+if app in ('frogcms', 'wolfcms'):
+    run('sed -i -e "s/%s-dbvs/%s-%s/" php/config.php' % (
+        quickstart, app_name, domain), cwd=app_name)
+    run('git commit -am "Update the base URL"', cwd=app_name)
 
-git push
+# Push our code to the cloud
+run('git push', cwd=app_name)
 
-echo "Complete!"
-echo "You can view your application at http://$APP-$DOMAIN.rhcloud.com"
+print("Complete!")
+print("You can view your application at http://%s-%s.rhcloud.com" % (
+      app_name, domain))
