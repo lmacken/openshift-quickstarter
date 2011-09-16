@@ -128,6 +128,11 @@ class TestReviewBoard(OpenShiftQuickstartTest, unittest.TestCase):
     title = 'Log In | Review Board'
     index = '/account/login/?next_page=/dashboard/'
 
+class TestSQLBuddy(OpenShiftQuickstartTest, unittest.TestCase):
+    app = 'sqlbuddy'
+    title = 'SQL Buddy'
+    index = '/sqlbuddy/login.php'
+
 
 if __name__ == '__main__':
     if not login:
