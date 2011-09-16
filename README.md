@@ -28,4 +28,5 @@ Deploy a variety of applications to the OpenShift cloud with a single command.
       * wolfcms - A PHP-based, easily extended content-management system
       * reviewboard - A web-based code review tool
       * pyblosxom - A lightweight file-based weblog system
+      * sqlbuddy - Web based MySQL administration
     
