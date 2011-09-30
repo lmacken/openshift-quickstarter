@@ -39,6 +39,7 @@ quickstarts = {
     'turbogears2': {'type': python, 'db': True, 'repo': lmacken_repo},
     'django': {'type': python, 'db': True, 'repo': lmacken_fork_repo},
     'pyblosxom': {'type': python, 'db': False, 'repo': lmacken_repo},
+    'flask': {'type': python, 'db': False, 'repo': openshift_repo},
     'rails': {'type': ruby, 'db': True, 'repo': openshift_repo},
     'reviewboard': {'type': python, 'db': True, 'repo': openshift_repo},
     'mediawiki': {'type': php, 'db': True, 'repo': openshift_repo},

@@ -16,6 +16,7 @@ Deploy a variety of applications to the OpenShift cloud with a single command.
       * pyramid - A fast, minimal, well-tested Python web framework
       * turbogears2 - Front-to-back Python web development megaframework
       * django - A high-level Python Web framework
+      * flask - A lightweight Python microframework
       * rails - A comprehensive Ruby web-application framework
       * cakephp - A rapid development PHP framework
       * seambooking - Seam is a platform for building rich webapps in Java
