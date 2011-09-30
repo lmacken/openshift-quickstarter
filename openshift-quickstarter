@@ -51,6 +51,7 @@ quickstarts = {
     'seambooking': {'type': java, 'db': True, 'repo': openshift_repo},
     'sqlbuddy': {'type': php, 'db': True, 'repo': openshift_alt_repo},
     'dancer': {'type': perl, 'db': False, 'repo': openshift_repo},
+    'sinatra': {'type': ruby, 'db': False, 'repo': openshift_repo},
 }
 
 run = lambda cmd, **kw: subprocess.call(cmd, shell=True, **kw)

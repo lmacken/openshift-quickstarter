@@ -21,6 +21,7 @@ Deploy a variety of applications to the OpenShift cloud with a single command.
       * cakephp - A rapid development PHP framework
       * seambooking - Seam is a platform for building rich webapps in Java
       * dancer -  A micro web application framework for Perl
+      * sinatra - A DSL for creating web applications in Ruby
     
     [ Content Management ]
       * drupal - A content-management platform

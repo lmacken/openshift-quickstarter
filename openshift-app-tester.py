@@ -141,6 +141,11 @@ class TestDancer(OpenShiftQuickstartTest, unittest.TestCase):
     app = 'dancer'
     title = 'Perl is dancing'
 
+class TestSinatra(OpenShiftQuickstartTest, unittest.TestCase):
+    app = 'sinatra'
+    title = 'the time where this server lives is'
+
+
 
 if __name__ == '__main__':
     if not login:
