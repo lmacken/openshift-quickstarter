@@ -136,14 +136,17 @@ class TestSQLBuddy(OpenShiftQuickstartTest, unittest.TestCase):
 class TestFlask(OpenShiftQuickstartTest, unittest.TestCase):
     app = 'flask'
     title = 'Hello World!'
+    db = False
 
 class TestDancer(OpenShiftQuickstartTest, unittest.TestCase):
     app = 'dancer'
     title = 'Perl is dancing'
+    db = False
 
 class TestSinatra(OpenShiftQuickstartTest, unittest.TestCase):
     app = 'sinatra'
     title = 'the time where this server lives is'
+    db = False
 
 class TestPiwik(OpenShiftQuickstartTest, unittest.TestCase):
     app = 'piwik'
