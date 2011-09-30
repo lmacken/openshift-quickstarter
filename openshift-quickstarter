@@ -52,6 +52,7 @@ quickstarts = {
     'sqlbuddy': {'type': php, 'db': True, 'repo': openshift_alt_repo},
     'dancer': {'type': perl, 'db': False, 'repo': openshift_repo},
     'sinatra': {'type': ruby, 'db': False, 'repo': openshift_repo},
+    'piwik': {'type': php, 'db': True, 'repo': openshift_alt_repo},
 }
 
 run = lambda cmd, **kw: subprocess.call(cmd, shell=True, **kw)
@@ -73,6 +74,8 @@ if app['db']:
 if quickstart == 'dancer':
     run('git rm -fr perl', cwd=app_name)
     run('git commit -a -m "remove stock perl dir to prepare for Dancer"', cwd=app_name)
+elif quickstart == 'piwik':
+    run('rm -fr php/*', cwd=app_name)
 
 # Pull in the appropriate quickstart template
 run('git remote add upstream -m master %s' % app['repo'] % quickstart,

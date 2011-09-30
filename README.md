@@ -23,7 +23,7 @@ Deploy a variety of applications to the OpenShift cloud with a single command.
       * dancer -  A micro web application framework for Perl
       * sinatra - A DSL for creating web applications in Ruby
     
-    [ Content Management ]
+    [ Applications ]
       * drupal - A content-management platform
       * wordpress - Blog tool and publishing platform
       * mediawiki - A wiki engine
@@ -32,4 +32,5 @@ Deploy a variety of applications to the OpenShift cloud with a single command.
       * reviewboard - A web-based code review tool
       * pyblosxom - A lightweight file-based weblog system
       * sqlbuddy - Web based MySQL administration
+      * piwik - Open source web analytics
     

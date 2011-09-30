@@ -145,6 +145,9 @@ class TestSinatra(OpenShiftQuickstartTest, unittest.TestCase):
     app = 'sinatra'
     title = 'the time where this server lives is'
 
+class TestPiwik(OpenShiftQuickstartTest, unittest.TestCase):
+    app = 'piwik'
+    title = 'Open Source Web Analytics'
 
 
 if __name__ == '__main__':
