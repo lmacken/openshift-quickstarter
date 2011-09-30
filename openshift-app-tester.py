@@ -137,6 +137,10 @@ class TestFlask(OpenShiftQuickstartTest, unittest.TestCase):
     app = 'flask'
     title = 'Hello World!'
 
+class TestDancer(OpenShiftQuickstartTest, unittest.TestCase):
+    app = 'dancer'
+    title = 'Welcome to OpenShift'
+
 
 if __name__ == '__main__':
     if not login:

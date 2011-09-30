@@ -20,6 +20,7 @@ Deploy a variety of applications to the OpenShift cloud with a single command.
       * rails - A comprehensive Ruby web-application framework
       * cakephp - A rapid development PHP framework
       * seambooking - Seam is a platform for building rich webapps in Java
+      * dancer -  A micro web application framework for Perl
     
     [ Content Management ]
       * drupal - A content-management platform
