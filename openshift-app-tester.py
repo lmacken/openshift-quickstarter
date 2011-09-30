@@ -139,7 +139,7 @@ class TestFlask(OpenShiftQuickstartTest, unittest.TestCase):
 
 class TestDancer(OpenShiftQuickstartTest, unittest.TestCase):
     app = 'dancer'
-    title = 'Welcome to OpenShift'
+    title = 'Perl is dancing'
 
 
 if __name__ == '__main__':

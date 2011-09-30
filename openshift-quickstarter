@@ -68,6 +68,11 @@ if app['db']:
     print("Adding %s cartridge to %s" % (db, app_name))
     run('rhc-ctl-app -a %s -e add-%s -l %s' % (app_name, db, login))
 
+# Pre-merge configuration
+if quickstart == 'dancer':
+    run('git rm -fr perl', cwd=app_name)
+    run('git commit -a -m "remove stock perl dir to prepare for Dancer"', cwd=app_name)
+
 # Pull in the appropriate quickstart template
 run('git remote add upstream -m master %s' % app['repo'] % quickstart,
     cwd=app_name)
