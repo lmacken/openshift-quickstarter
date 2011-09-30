@@ -83,7 +83,7 @@ run('git remote add upstream -m master %s' % app['repo'] % quickstart,
 run('git pull -s recursive -X theirs upstream master', cwd=app_name)
 
 # Pre-deployment configuration
-if app in ('frogcms', 'wolfcms'):
+if quickstart in ('frogcms', 'wolfcms'):
     run('sed -i -e "s/%s-dbvs/%s-%s/" php/config.php' % (
         quickstart, app_name, domain), cwd=app_name)
     run('git commit -am "Update the base URL"', cwd=app_name)
