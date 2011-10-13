@@ -53,6 +53,7 @@ quickstarts = {
     'dancer': {'type': perl, 'db': False, 'repo': openshift_repo},
     'sinatra': {'type': ruby, 'db': False, 'repo': openshift_repo},
     'piwik': {'type': php, 'db': True, 'repo': openshift_alt_repo},
+    'sugarcrm': {'type': php, 'db': True, 'repo': openshift_repo},
 }
 
 run = lambda cmd, **kw: subprocess.call(cmd, shell=True, **kw)

@@ -152,6 +152,11 @@ class TestPiwik(OpenShiftQuickstartTest, unittest.TestCase):
     app = 'piwik'
     title = 'Open Source Web Analytics'
 
+class TestSugarCRM(OpenShiftQuickstartTest, unittest.TestCase):
+    app = 'sugarcrm'
+    title = 'Sugar Setup Wizard'
+    index = '/install.php?goto=SilentInstall&cli=true'
+
 
 if __name__ == '__main__':
     if not login:
