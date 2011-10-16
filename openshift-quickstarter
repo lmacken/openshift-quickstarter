@@ -35,7 +35,7 @@ lmacken_repo = 'git://github.com/lmacken/%s-openshift-quickstart.git'
 lmacken_fork_repo = 'git://github.com/lmacken/%s-example.git'
 
 quickstarts = {
-    'pyramid': {'type': python, 'db': True, 'repo': lmacken_repo },
+    'pyramid': {'type': python, 'db': True, 'repo': lmacken_repo},
     'turbogears2': {'type': python, 'db': True, 'repo': lmacken_repo},
     'django': {'type': python, 'db': True, 'repo': lmacken_fork_repo},
     'pyblosxom': {'type': python, 'db': False, 'repo': lmacken_repo},
@@ -96,7 +96,7 @@ if quickstart in ('frogcms', 'wolfcms'):
 # Push our code to the cloud
 run('git push', cwd=app_name)
 
-print("Complete!")
+print("\nComplete!")
 print("You can view your application at http://%s-%s.rhcloud.com" % (
       app_name, domain))
 
