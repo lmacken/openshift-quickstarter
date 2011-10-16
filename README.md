@@ -35,4 +35,5 @@ Deploy a variety of applications to the OpenShift cloud with a single command.
       * piwik - Open source web analytics
       * sugarcrm - Open source business & social CRM software
       * tweetstream - A realtime Twitter aggregator
+      * joomla - A dynamic portal engine and content management system
     

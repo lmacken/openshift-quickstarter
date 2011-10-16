@@ -157,6 +157,10 @@ class TestSugarCRM(OpenShiftQuickstartTest, unittest.TestCase):
     title = 'Sugar Setup Wizard'
     index = '/install.php?goto=SilentInstall&cli=true'
 
+class TestJoomla(OpenShiftQuickstartTest, unittest.TestCase):
+    app = 'joomla'
+    title = 'Congratulations! You have a Joomla! site!'
+
 
 if __name__ == '__main__':
     if not login:
