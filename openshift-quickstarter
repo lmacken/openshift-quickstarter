@@ -54,6 +54,8 @@ quickstarts = {
     'sinatra': {'type': ruby, 'db': False, 'repo': openshift_repo},
     'piwik': {'type': php, 'db': True, 'repo': openshift_alt_repo},
     'sugarcrm': {'type': php, 'db': True, 'repo': openshift_repo},
+    'tweetstream': {'type': java, 'db': False, 'repo': openshift_repo,
+        'manual_config': True},
 }
 
 run = lambda cmd, **kw: subprocess.call(cmd, shell=True, **kw)

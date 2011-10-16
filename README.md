@@ -34,4 +34,5 @@ Deploy a variety of applications to the OpenShift cloud with a single command.
       * sqlbuddy - Web based MySQL administration
       * piwik - Open source web analytics
       * sugarcrm - Open source business & social CRM software
+      * tweetstream - A realtime Twitter aggregator
     
