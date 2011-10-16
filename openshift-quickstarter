@@ -19,7 +19,7 @@
 #
 # Author: Luke Macken <lmacken@redhat.com>
 
-import sys, subprocess
+import os, sys, subprocess
 
 python = 'wsgi-3.2'
 perl = 'perl-5.10'
@@ -63,6 +63,10 @@ if len(sys.argv) != 5:
     sys.exit(1)
 
 prog, login, domain, app_name, quickstart = sys.argv
+
+if os.path.isdir(app_name):
+    print("Application '%s' already exists in current directory" % app_name)
+    sys.exit(1)
 
 # Create the application & database
 app = quickstarts[quickstart]
