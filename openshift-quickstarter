@@ -99,3 +99,9 @@ run('git push', cwd=app_name)
 print("Complete!")
 print("You can view your application at http://%s-%s.rhcloud.com" % (
       app_name, domain))
+
+# Mention required manual configuration for certain apps
+if app.get('manual_config'):
+    print("Manual configuration is required for this application.")
+    print("See this page for details: %s" %
+        app['repo'].replace('.git', '').replace('git:', 'http:') % quickstart)
