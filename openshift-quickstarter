@@ -57,6 +57,7 @@ quickstarts = {
     'tweetstream': {'type': java, 'db': False, 'repo': openshift_repo,
         'manual_config': True},
     'joomla': {'type': php, 'db': True, 'repo': openshift_repo},
+    'phpbb': {'type': php, 'db': True, 'repo': openshift_repo},
 }
 
 run = lambda cmd, **kw: subprocess.call(cmd, shell=True, **kw)

@@ -36,4 +36,5 @@ Deploy a variety of applications to the OpenShift cloud with a single command.
       * sugarcrm - Open source business & social CRM software
       * tweetstream - A realtime Twitter aggregator
       * joomla - A dynamic portal engine and content management system
+      * phpbb - A free flat-forum bulletin board
     
