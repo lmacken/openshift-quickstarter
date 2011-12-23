@@ -63,7 +63,8 @@ quickstarts = {
 run = lambda cmd, **kw: subprocess.call(cmd, shell=True, **kw)
 
 if len(sys.argv) != 5:
-    print(file('README.md').read())
+    root = os.path.sep.join(__file__.split(os.path.sep)[:-1])
+    print(file(root + '/README.md').read())
     sys.exit(1)
 
 prog, login, domain, app_name, quickstart = sys.argv
