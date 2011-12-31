@@ -19,7 +19,9 @@
 #
 # Author: Luke Macken <lmacken@redhat.com>
 
-import os, sys, subprocess
+import os
+import sys
+import subprocess
 
 python = 'wsgi-3.2'
 perl = 'perl-5.10'
@@ -83,7 +85,8 @@ if app['db']:
 # Pre-merge configuration
 if quickstart == 'dancer':
     run('git rm -fr perl', cwd=app_name)
-    run('git commit -a -m "remove stock perl dir to prepare for Dancer"', cwd=app_name)
+    run('git commit -a -m "remove stock perl dir to prepare for Dancer"',
+        cwd=app_name)
 elif quickstart == 'piwik':
     run('rm -fr php/*', cwd=app_name)
 
