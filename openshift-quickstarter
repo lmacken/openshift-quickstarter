@@ -88,9 +88,10 @@ elif quickstart == 'piwik':
     run('rm -fr php/*', cwd=app_name)
 
 # Pull in the appropriate quickstart template
-run('git remote add upstream -m master %s' % app['repo'] % quickstart,
+run('git remote add quickstart -m master %s' % app['repo'] % quickstart,
     cwd=app_name)
-run('git pull -s recursive -X theirs --no-rebase upstream master', cwd=app_name)
+run('git pull -s recursive -X theirs --no-rebase quickstart master',
+    cwd=app_name)
 
 # Pre-deployment configuration
 if quickstart in ('frogcms', 'wolfcms'):
