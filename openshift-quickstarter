@@ -62,7 +62,11 @@ quickstarts = {
     'phpbb': {'type': php, 'db': True, 'repo': openshift_repo},
 }
 
-run = lambda cmd, **kw: subprocess.call(cmd, shell=True, **kw)
+def run(cmd, **kw):
+    status = subprocess.call(cmd, shell=True, **kw)
+    if status != 0:
+        print "** '%s' failed.  Aborting" % cmd
+        sys.exit(status)
 
 if len(sys.argv) != 5:
     root = os.path.sep.join(__file__.split(os.path.sep)[:-1])
