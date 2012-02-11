@@ -26,7 +26,7 @@ import subprocess
 python = 'python-2.6'
 perl = 'perl-5.10'
 java = 'jbossas-7.0'
-ruby = 'rack-1.1'
+ruby = 'ruby-1.8'
 php = 'php-5.3'
 
 db = 'mysql-5.1'
