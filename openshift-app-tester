@@ -99,7 +99,7 @@ class TestDjango(OpenShiftQuickstartTest, unittest.TestCase):
 
 class TestWordpress(OpenShiftQuickstartTest, unittest.TestCase):
     app = 'wordpress'
-    title = 'Welcome to the famous five minute WordPress installation process!'
+    title = 'WordPress'
     index = '/wp-admin/install.php'
 
 
