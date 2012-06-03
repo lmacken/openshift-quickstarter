@@ -69,8 +69,7 @@ def run(cmd, **kw):
         sys.exit(status)
 
 if len(sys.argv) != 5:
-    root = os.path.sep.join(__file__.split(os.path.sep)[:-1])
-    print(file(root + '/README.md').read())
+    print(file(os.path.join(os.path.dirname(__file__), 'README.md')).read())
     sys.exit(1)
 
 prog, login, domain, app_name, quickstart = sys.argv
