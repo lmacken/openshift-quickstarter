@@ -83,7 +83,7 @@ app = quickstarts[quickstart]
 run('rhc app create -a %s -t %s -l %s' % (app_name, app['type'], login))
 if app['db']:
     print("Adding %s cartridge to %s" % (db, app_name))
-    run('rhc app cartridge add -a %s -c %s -l %s' % (app_name, db, login))
+    run('rhc cartridge add -a %s -c %s -l %s' % (app_name, db, login))
 
 # Pre-merge configuration
 if quickstart == 'dancer':
