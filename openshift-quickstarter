@@ -23,7 +23,7 @@ import os
 import sys
 import subprocess
 
-python = 'python-2.6'
+python = 'python-2.7'
 perl = 'perl-5.10'
 java = 'jbossas-7.0'
 ruby = 'ruby-1.8'
@@ -35,9 +35,11 @@ openshift_repo = 'git://github.com/openshift/%s-example.git'
 openshift_alt_repo = 'git://github.com/openshift/%s-openshift-quickstart.git'
 lmacken_repo = 'git://github.com/lmacken/%s-openshift-quickstart.git'
 lmacken_fork_repo = 'git://github.com/lmacken/%s-example.git'
+ryansb_repo = 'git://github.com/ryansb/%s-openshift-quickstart.git'
 
 quickstarts = {
     'pyramid': {'type': python, 'db': True, 'repo': lmacken_repo},
+    'cornice': {'type': python, 'db': True, 'repo': ryansb_repo},
     'turbogears2': {'type': python, 'db': True, 'repo': lmacken_repo},
     'django': {'type': python, 'db': True, 'repo': lmacken_fork_repo},
     'pyblosxom': {'type': python, 'db': False, 'repo': lmacken_repo},
