@@ -14,6 +14,7 @@ Deploy a variety of applications to the OpenShift cloud with a single command.
     
     [ Frameworks ]
       * pyramid - A fast, minimal, well-tested Python web framework
+      * cornice - Cornice provides helpers to build & document Web Services with Pyramid
       * turbogears2 - Front-to-back Python web development megaframework
       * django - A high-level Python Web framework
       * flask - A lightweight Python microframework
